@@ -1,186 +1,29 @@
-      <!DOCTYPE html>
-<html lang="en">
-<head>
- <title>Youtube</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-</head>
-<body>
-  
-
-<style>
-
-     
-.content {
-	margin: auto;	
-}
 
 
-.cardform {
-  float: left;
-   width: 100%;
-
+  <div id="">
+   <label for="fname">First name:</label>
+  <input type="text" id="fname" name="fname"><br><br>
+  <label for="lname">Last name:</label>
+  <input type="text" id="lname" name="lname"><br><br>
  
- margin: auto;
+  <button onclick="senddata()">Click me</button>
+  
+  </div>
+   <div id="demo">
+    </div>
+  <script>
+  function senddata(){
+  const  name_1 = document.getElementById("fname").value;
+  const  name_2 = document.getElementById("lname").value;
+  console.log(fname);
+  
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+    document.getElementById("demo").innerHTML = this.responseText;
+  }
+  xhttp.open("POST", "asd.php");
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("fname="+name_1+"&lname="+name_2);}
+  </script>
 
   
-  padding: auto;
- 
-}
-.card{
-  float: left;
-  display: block;
-  
-  margin: 10px;
-   width: 198px;
- 
- 
-  padding: px;
-  background-color: #edebed;
- height: 220px;
- overflow: hidden;
- text-overflow: clip; 
-}
-.p_2{
- float: left;
- font-size: 20px;
-   text-align: center;
-  margin: 0px;
-   
-  
- 
-  padding: 0px;
- overflow: hidden;
-
-}
-
-.mid_section {
-align-items:  center;	
-margin-left: 0px;
-  text-align: center;
- width: 250px;
-  border: 2px solid black;
-}
-.mid_section input{
-align-items:  center;	
- padding: 0px;
-  margin-top: 0px;
-  font-size: 17px;
-  border: none;
-  height: 50px;
-  box-sizing: border-box;
-  text-align: center;
- width:150px;
-
-}
-
- .mid_section button{
-
-   align-items:  center;	
-  padding: 0px;
-  margin-top:0px;
-  
-  background: #ddd;
-  font-size: 17px;
-   border-color: black;
-height: 50px;
- width: 40px
-}
-
-@media only screen and (max-width: 500px) {
- .cardform {width:100% ; height: 210px;  margin: auto;}
- .p_2 {
- margin:auto;
- text-align: center;
- font-size: 20px;
-height: auto; 
- }
- .card{
-  font-size: 20px;
-text-align: center;
- width:351px;
-  margin: auto;
- height: 300px; 
-
-
- }
- .content {
-margin: auto;
-}	
-}
-}
-  </style> 
-
-  <header>
-       <center>
-      	<div class="left-section">
-<!--	<i class="material-icons logo" >menu</i>-->
-  
-	<img src="youtube-logo.png">
-	</div>
-    <br>
-
-	<div class="mid_section">
-	
-	<input  id="query" type ="text" placeholder="بحث"/><button onclick="keyWordsearch()"> 
-        <i class="material-icons" >search</i></button> 
-        <i class= "material-icons">mic</i>
-	
-
-	</div>
-    
-	</header>
-<div class="content"id ="results" >
-   
-
-    
-
-  
-     </div>
-    
-     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-    <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady">  </script>
-   
-
-   <script>
-     function keyWordsearch(){
-        gapi.client.setApiKey("AIzaSyAqXjPFm1VSwaN4udczF2iNxojcNzKStNY");
-        gapi.client.load('youtube', 'v3', function() {
-                makeRequest();
-        });
-          }
-
-      function makeRequest() {
-        var q = $('#query').val();
-        var request = gapi.client.youtube.search.list({
-                q: q,
-                part: 'snippet', 
-                maxResults: 6
-        });
-        request.execute(function(response)  {                                                                                    
-                $('#results').empty()
-                var srchItems = response.result.items;                      
-                $.each(srchItems, function(index, item) {
-                vidTitle = item.snippet.title;  
-                 videoId = item.id.videoId;
-				
-				// $('#resultss').append('<pre>'+ videoId + '</pre>');  
-               $('#results').append('<div class="card">'+'<iframe class ="cardform"  src="https://www.youtube.com/embed/'+ item.id.videoId +'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'+' <p class="p_2">'+vidTitle+'</p>'+'</div>');  
-			 //$('#resultss').append('  <center>'+'<div class="card_2">'+vidTitle+'</div>'+'  </center>');  
-        })  
-    })  
-}
-    </script> 
-     </style>
-</div>
-
-<div class="footer">
-  <p></p>
-</div>
-
-</body>
-</html>
