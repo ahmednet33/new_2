@@ -21,7 +21,7 @@
   xhttp.onload = function() {
     document.getElementById("demo").innerHTML = this.responseText;
   }
-  xhttp.open("POST", "asd.php");
+  xhttp.open("POST", "http://41.199.131.230:8080/test/asd.php");
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send("fname="+name_1+"&lname="+name_2);}
   </script>
